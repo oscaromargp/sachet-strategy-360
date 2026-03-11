@@ -1,0 +1,127 @@
+{
+  "name": "Sachet Strategy 360 - Contact Form",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sachet-contacto",
+        "responseMode": "onReceived"
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "sachet-contacto",
+      "webhookTestAll": true,
+      "webhookTestUrl": "https://n8n.zxyw.site/webhook/sachet-contacto"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "1-7ApBPCrblpFqQzFp1elPRdGp0tNEAemwcp5n0SoMXk",
+        "range": "A:F",
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        }
+      },
+      "id": "google-sheets",
+      "name": "Guardar en Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [500, 300],
+      "credentials": {
+        "googleSheetsOAuth2Api": "google-sheets"
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $credentials.gmailEmail }}",
+        "toEmail": "={{ $credentials.gmailEmail }}",
+        "subject": "Nueva cotización - Sachet Strategy 360",
+        "emailType": "html",
+        "body": "<h2>Nueva solicitud de cotización</h2>\n<p><strong>Nombre:</strong> {{ $json.name }}</p>\n<p><strong>Email:</strong> {{ $json.email }}</p>\n<p><strong>Interés:</strong> {{ $json.interest }}</p>\n<p><strong>Fecha:</strong> {{ $json.fecha }}</p>",
+        "options": {}
+      },
+      "id": "gmail-notify",
+      "name": "Email a ti",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [750, 200],
+      "credentials": {
+        "gmailOAuth2": "gmail"
+      }
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{ $credentials.gmailEmail }}",
+        "toEmail": "={{ $json.email }}",
+        "subject": "Gracias por contactarnos - Sachet Strategy 360",
+        "emailType": "html",
+        "body": "<h2>¡Gracias por contactarnos, {{ $json.name }}!</h2>\n<p>Hemos recibido tu solicitud de cotización.</p>\n<p>Te contactaremos en menos de 24 horas.</p>\n<br>\n<p><strong>Detalles:</strong></p>\n<p>Interés: {{ $json.interest }}</p>\n<br>\n<p>Equipo Sachet Strategy 360</p>",
+        "options": {}
+      },
+      "id": "gmail-confirm",
+      "name": "Confirmación al cliente",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2,
+      "position": [750, 400],
+      "credentials": {
+        "gmailOAuth2": "gmail"
+      }
+    },
+    {
+      "parameters": {
+        "values": {
+          "json": {
+            "success": true,
+            "message": "Solicitud recibida"
+          }
+        },
+        "options": {}
+      },
+      "id": "respond",
+      "name": "Responds to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1000, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Guardar en Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Guardar en Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Email a ti",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Confirmación al cliente",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Responds to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "sachet-v2"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Sachet Contact Form",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "sachet-contacto",
+        "responseMode": "lastNode"
+      },
+      "id": "webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [250, 300],
+      "webhookId": "sachet-contacto"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "sheetId": "1-7ApBPCrblpFqQzFp1elPRdGp0tNEAemwcp5n0SoMXk",
+        "range": "A1:F1",
+        "headerRow": 1,
+        "options": {
+          "valueInputMode": "USER_ENTERED"
+        }
+      },
+      "id": "sheets",
+      "name": "Google Sheets",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [500, 300]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {},
+  "id": "sachet-simple"
+}
