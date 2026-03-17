@@ -1,0 +1,11 @@
+{
+  "permission": {
+    "skill": {
+      "n8n-*": "allow"
+    }
+  },
+  "env": {
+    "N8N_API_URL": "https://n8n.zxyw.site/api/v1",
+    "N8N_API_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIzYzE4MDdkZS0xMTI4LTQ1OTgtYjE5OS1mZjQ2ZmIwZGYzODUiLCJpc3MiOiJuOG4iLCJhdWQiOiJwdWJsaWMtYXBpIiwianRpIjoiNDhjNzNkZGQtYmY5YS00Y2QzLWEwMTItNDIyODg2YmY4NzQxIiwiaWF0IjoxNzczNzA3Mjk3LCJleHAiOjE3NzYyMjIwMDB9.4WciF3NXxCRHfnoYPWQqTVgmB6ROUdc_FwbuxjUe8So"
+  }
+}
