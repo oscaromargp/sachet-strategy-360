@@ -1,4 +1,9 @@
 # Sachet Strategy 360 - Landing Page Premium
+<p align="center">
+  <img src="assets/banner.png" alt="Sachet Strategy 360" width="100%"/>
+</p>
+
+
 
 Landing Page Premium en modo oscuro (Dark Luxury) para Sachet Strategy 360, diseñada con tecnología de neuroestrategia de empaques táctiles.
 
@@ -154,3 +159,13 @@ Si este proyecto te fue útil, considera apoyarlo.
   <strong>A Dios, toda la gloria.</strong>
   <br/>
 </p>
+
+
+## 📸 Capturas de pantalla
+
+<p align="center">
+  <img src="assets/screenshot-1.png" alt="Captura del proyecto" width="700" style="border-radius:8px;"/>
+</p>
+
+> ¿No puedes ver la imagen? [Ver en el navegador](assets/)
+
